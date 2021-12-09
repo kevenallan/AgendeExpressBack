@@ -9,6 +9,7 @@ br\edu\ifpb\agendeexpress\AgendeExpress\SwaggerConfig\SwaggerConfig.class
 br\edu\ifpb\agendeexpress\AgendeExpress\Model\Cliente.class
 br\edu\ifpb\agendeexpress\AgendeExpress\AgendeExpressApplication.class
 br\edu\ifpb\agendeexpress\AgendeExpress\Service\HorarioService.class
+br\edu\ifpb\agendeexpress\AgendeExpress\Configuration\SecurityConfig.class
 br\edu\ifpb\agendeexpress\AgendeExpress\Repository\ClienteRepository.class
 br\edu\ifpb\agendeexpress\AgendeExpress\Controller\HorarioController.class
 br\edu\ifpb\agendeexpress\AgendeExpress\DTO\HorarioListarDTO$HorarioListarDTOBuilder.class
@@ -24,6 +25,7 @@ br\edu\ifpb\agendeexpress\AgendeExpress\Controller\ClienteController.class
 br\edu\ifpb\agendeexpress\AgendeExpress\Model\Empresa.class
 br\edu\ifpb\agendeexpress\AgendeExpress\Repository\EmpresaRepository.class
 br\edu\ifpb\agendeexpress\AgendeExpress\DTO\HorarioCadastrarDTO.class
+br\edu\ifpb\agendeexpress\AgendeExpress\Configuration\SecurityConfig$WebConfig.class
 br\edu\ifpb\agendeexpress\AgendeExpress\Controller\EmpresaController.class
 br\edu\ifpb\agendeexpress\AgendeExpress\Model\Cliente$ClienteBuilder.class
 br\edu\ifpb\agendeexpress\AgendeExpress\Model\Empresa$EmpresaBuilder.class

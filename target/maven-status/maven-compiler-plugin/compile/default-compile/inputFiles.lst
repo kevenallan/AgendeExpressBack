@@ -13,6 +13,7 @@ C:\Users\keven\Desktop\AgendeExpressBack\src\main\java\br\edu\ifpb\agendeexpress
 C:\Users\keven\Desktop\AgendeExpressBack\src\main\java\br\edu\ifpb\agendeexpress\AgendeExpress\DTO\EmpresaAtualizarDTO.java
 C:\Users\keven\Desktop\AgendeExpressBack\src\main\java\br\edu\ifpb\agendeexpress\AgendeExpress\Repository\ClienteRepository.java
 C:\Users\keven\Desktop\AgendeExpressBack\src\main\java\br\edu\ifpb\agendeexpress\AgendeExpress\DTO\ClienteLoginDTO.java
+C:\Users\keven\Desktop\AgendeExpressBack\src\main\java\br\edu\ifpb\agendeexpress\AgendeExpress\Configuration\SecurityConfig.java
 C:\Users\keven\Desktop\AgendeExpressBack\src\main\java\br\edu\ifpb\agendeexpress\AgendeExpress\Controller\HorarioController.java
 C:\Users\keven\Desktop\AgendeExpressBack\src\main\java\br\edu\ifpb\agendeexpress\AgendeExpress\Service\EmpresaService.java
 C:\Users\keven\Desktop\AgendeExpressBack\src\main\java\br\edu\ifpb\agendeexpress\AgendeExpress\AgendeExpressApplication.java
