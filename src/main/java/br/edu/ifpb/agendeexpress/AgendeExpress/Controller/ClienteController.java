@@ -22,7 +22,7 @@ import br.edu.ifpb.agendeexpress.AgendeExpress.Service.ClienteService;
 
 @RestController
 @RequestMapping(value = "/cliente")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "/*")
 public class ClienteController {
 
 	@Autowired
