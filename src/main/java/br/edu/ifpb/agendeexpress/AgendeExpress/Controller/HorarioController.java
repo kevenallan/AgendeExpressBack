@@ -38,7 +38,7 @@ public class HorarioController {
 	}
 	
 	@GetMapping("/filtrar-horario")
-	public List<String> filtrar(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime data, @RequestParam @NotNull Long idEmpresa){
+	public List<String> filtrar(@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime data, @RequestParam @NotNull Long idEmpresa){
 		return this.horarioService.filtrar(data, idEmpresa);
 	}
 	

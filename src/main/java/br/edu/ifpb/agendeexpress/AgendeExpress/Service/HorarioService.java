@@ -66,6 +66,10 @@ public class HorarioService {
 	public List<String> filtrar(LocalDateTime data , Long idEmpresa) {
 		LocalDateTime horaHoje = LocalDateTime.now();
 		
+		if (data == null) {
+			data = LocalDateTime.now();
+		}
+		
 		List<Horario> horarios = this.horarioRepository.listarPorDia(data, idEmpresa);
 		
 		List<String> horariosMarcados = new ArrayList<>();
