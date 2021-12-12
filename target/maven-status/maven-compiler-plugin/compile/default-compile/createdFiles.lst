@@ -17,7 +17,6 @@ br\edu\ifpb\agendeexpress\AgendeExpress\DTO\ClienteAtualizarDTO$ClienteAtualizar
 br\edu\ifpb\agendeexpress\AgendeExpress\DTO\EmpresaAtualizarDTO.class
 br\edu\ifpb\agendeexpress\AgendeExpress\Service\ClienteService.class
 br\edu\ifpb\agendeexpress\AgendeExpress\Service\EmpresaService.class
-br\edu\ifpb\agendeexpress\AgendeExpress\Configuration\CorsConfig.class
 br\edu\ifpb\agendeexpress\AgendeExpress\DTO\ClienteLoginDTO.class
 br\edu\ifpb\agendeexpress\AgendeExpress\DTO\EmpresaAtualizarDTO$EmpresaAtualizarDTOBuilder.class
 br\edu\ifpb\agendeexpress\AgendeExpress\DTO\HorarioListarDTO.class

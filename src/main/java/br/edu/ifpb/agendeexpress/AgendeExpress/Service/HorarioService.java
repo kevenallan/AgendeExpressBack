@@ -93,4 +93,35 @@ public class HorarioService {
 		}
 		return horas;
 	}
+	
+	public List<HorarioListarDTO> buscarHorarioPorCliente(Long idCliente, Long idEmpresa) {
+        Optional<Cliente> cliente = this.clienteRepository.findById(idCliente);
+        Optional<Empresa> empresa = this.empresaRepository.findById(idEmpresa);
+
+        List<Horario> horarios = new ArrayList<>();
+        if(cliente.isPresent() && empresa.isPresent()) {
+            horarios = this.horarioRepository.findByClienteAndEmpresa(cliente.get(), empresa.get()); 
+        }
+
+        return this.convertDTO(horarios);
+    }
+	
+	private List<HorarioListarDTO> convertDTO (List<Horario> horarios) {
+        List<HorarioListarDTO> horariosDTO = new ArrayList<>();
+
+        for(Horario hr : horarios) {
+            HorarioListarDTO hrDTO =  HorarioListarDTO.builder()
+            .ano(hr.getDatahora().getYear())
+            .mes(hr.getDatahora().getMonthValue())
+            .dia(hr.getDatahora().getDayOfMonth() < 10 ? "0" + hr.getDatahora().getDayOfMonth() : "" + hr.getDatahora().getDayOfMonth())
+            .hora(hr.getDatahora().getHour() < 10 ? "0" + hr.getDatahora().getHour() : "" + hr.getDatahora().getHour())
+            .minuto(hr.getDatahora().getMinute())
+            .diaSemana(hr.getDatahora().getDayOfWeek().getValue())
+            .build();
+
+            horariosDTO.add(hrDTO);
+        }
+
+        return horariosDTO;
+    }
 }
