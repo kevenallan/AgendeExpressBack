@@ -25,7 +25,7 @@ import br.edu.ifpb.agendeexpress.AgendeExpress.Service.EmpresaService;
 
 @RestController
 @RequestMapping(value = "/empresa")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EmpresaController {
 
 	@Autowired
