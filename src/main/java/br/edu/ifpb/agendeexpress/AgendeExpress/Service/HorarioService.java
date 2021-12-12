@@ -43,8 +43,10 @@ public class HorarioService {
 				
 	}
 	
-	public List<HorarioListarDTO> listar(LocalDateTime dataHora, Long idEmpresa){
-		List<Horario> horarios = horarioRepository.listarPorDia(dataHora, idEmpresa);
+	public List<HorarioListarDTO> listar(String dataHora, Long idEmpresa){
+		LocalDateTime data = LocalDateTime.parse(dataHora);
+		System.out.println(data);
+		List<Horario> horarios = horarioRepository.listarPorDia(data, idEmpresa);
 		List<HorarioListarDTO> horariosDTO = new ArrayList<>();
 		
 		for(Horario hr : horarios) {
@@ -65,10 +67,6 @@ public class HorarioService {
 
 	public List<String> filtrar(LocalDateTime data , Long idEmpresa) {
 		LocalDateTime horaHoje = LocalDateTime.now();
-		
-		if (data == null) {
-			data = LocalDateTime.now();
-		}
 		
 		List<Horario> horarios = this.horarioRepository.listarPorDia(data, idEmpresa);
 		
