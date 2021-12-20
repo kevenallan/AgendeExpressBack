@@ -22,7 +22,7 @@ import br.edu.ifpb.agendeexpress.AgendeExpress.Service.ClienteService;
 
 @RestController
 @RequestMapping(value = "/cliente")
-@CrossOrigin(origins = "http://agende-express-front.herokuapp.com")
+@CrossOrigin(origins = "https://agende-express-front.herokuapp.com")
 public class ClienteController {
 
 	@Autowired
