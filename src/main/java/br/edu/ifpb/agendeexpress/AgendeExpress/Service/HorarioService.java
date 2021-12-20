@@ -43,26 +43,10 @@ public class HorarioService {
 				
 	}
 	
-	public List<HorarioListarDTO> listar(String dataHora, Long idEmpresa){
-		LocalDateTime data = LocalDateTime.parse(dataHora);
-		System.out.println(data);
-		List<Horario> horarios = horarioRepository.listarPorDia(data, idEmpresa);
-		List<HorarioListarDTO> horariosDTO = new ArrayList<>();
+	public List<HorarioListarDTO> listar(LocalDateTime dataHora, Long idEmpresa){
+		List<Horario> horarios = horarioRepository.listarPorDia(dataHora, idEmpresa);
 		
-		for(Horario hr : horarios) {
-			HorarioListarDTO hrDTO =  HorarioListarDTO.builder()
-			.ano(hr.getDatahora().getYear())
-			.mes(hr.getDatahora().getMonthValue())
-			.dia(hr.getDatahora().getDayOfMonth() < 10 ? "0" + hr.getDatahora().getDayOfMonth() : "" + hr.getDatahora().getDayOfMonth())
-			.hora(hr.getDatahora().getHour() < 10 ? "0" + hr.getDatahora().getHour() : "" + hr.getDatahora().getHour())
-			.minuto(hr.getDatahora().getMinute())
-			.diaSemana(hr.getDatahora().getDayOfWeek().getValue())
-			.build();
-			horariosDTO.add(hrDTO);
-		}
-		
-		return horariosDTO;
-
+		return this.convertDTO(horarios);
 	}
 
 	public List<String> filtrar(LocalDateTime data , Long idEmpresa) {
@@ -95,35 +79,47 @@ public class HorarioService {
 		}
 		return horas;
 	}
-	
+
+	public List<HorarioListarDTO> apagar(LocalDateTime dataHora, Long idCliente, Long idEmpresa){
+		Optional<Cliente> cliente = this.clienteRepository.findById(idCliente);
+		Optional<Empresa> empresa = this.empresaRepository.findById(idEmpresa);
+		Horario horario = this.horarioRepository.findByDatahoraAndClienteAndEmpresa(dataHora, cliente.get(), empresa.get());
+		if (horario == null) {
+			return null;
+		}
+		this.horarioRepository.delete(horario);
+		
+		return this.buscarHorarioPorCliente(idCliente, idEmpresa);
+	}
+
 	public List<HorarioListarDTO> buscarHorarioPorCliente(Long idCliente, Long idEmpresa) {
-        Optional<Cliente> cliente = this.clienteRepository.findById(idCliente);
-        Optional<Empresa> empresa = this.empresaRepository.findById(idEmpresa);
-
-        List<Horario> horarios = new ArrayList<>();
-        if(cliente.isPresent() && empresa.isPresent()) {
-            horarios = this.horarioRepository.findByClienteAndEmpresa(cliente.get(), empresa.get()); 
-        }
-
-        return this.convertDTO(horarios);
-    }
+		Optional<Cliente> cliente = this.clienteRepository.findById(idCliente);
+		Optional<Empresa> empresa = this.empresaRepository.findById(idEmpresa);
+		
+		List<Horario> horarios = new ArrayList<>();
+		if(cliente.isPresent() && empresa.isPresent()) {
+			horarios = this.horarioRepository.findByClienteAndEmpresa(cliente.get(), empresa.get()); 
+		}
+		
+		return this.convertDTO(horarios);
+	}
 	
 	private List<HorarioListarDTO> convertDTO (List<Horario> horarios) {
-        List<HorarioListarDTO> horariosDTO = new ArrayList<>();
-
-        for(Horario hr : horarios) {
-            HorarioListarDTO hrDTO =  HorarioListarDTO.builder()
-            .ano(hr.getDatahora().getYear())
-            .mes(hr.getDatahora().getMonthValue())
-            .dia(hr.getDatahora().getDayOfMonth() < 10 ? "0" + hr.getDatahora().getDayOfMonth() : "" + hr.getDatahora().getDayOfMonth())
-            .hora(hr.getDatahora().getHour() < 10 ? "0" + hr.getDatahora().getHour() : "" + hr.getDatahora().getHour())
-            .minuto(hr.getDatahora().getMinute())
-            .diaSemana(hr.getDatahora().getDayOfWeek().getValue())
-            .build();
-
-            horariosDTO.add(hrDTO);
-        }
-
-        return horariosDTO;
-    }
+		List<HorarioListarDTO> horariosDTO = new ArrayList<>();
+		
+		for(Horario hr : horarios) {
+			HorarioListarDTO hrDTO =  HorarioListarDTO.builder()
+			.ano(hr.getDatahora().getYear())
+			.mes(hr.getDatahora().getMonthValue())
+			.dia(hr.getDatahora().getDayOfMonth() < 10 ? "0" + hr.getDatahora().getDayOfMonth() : "" + hr.getDatahora().getDayOfMonth())
+			.hora(hr.getDatahora().getHour() < 10 ? "0" + hr.getDatahora().getHour() : "" + hr.getDatahora().getHour())
+			.minuto(hr.getDatahora().getMinute())
+			.diaSemana(hr.getDatahora().getDayOfWeek().getValue())
+			.build();
+			
+			horariosDTO.add(hrDTO);
+		}
+		
+		return horariosDTO;
+	}
 }

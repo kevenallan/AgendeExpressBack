@@ -33,7 +33,7 @@ public class HorarioController {
 	}
 	
 	@GetMapping("/listar")
-	public List<HorarioListarDTO> listar(@RequestParam String dataHora, @RequestParam @NotNull Long idEmpresa){
+	public List<HorarioListarDTO> listar(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataHora, @RequestParam @NotNull Long idEmpresa){
 		return this.horarioService.listar(dataHora, idEmpresa);
 	}
 	
@@ -43,8 +43,13 @@ public class HorarioController {
 	}
 	
 	@GetMapping("/buscar-horario-por-cliente")
-    public List<HorarioListarDTO> buscarHorarioPorCliente(@RequestParam @NotNull Long idCliente, @RequestParam @NotNull Long idEmpresa){
-        return this.horarioService.buscarHorarioPorCliente(idCliente, idEmpresa);
-    }
+	public List<HorarioListarDTO> buscarHorarioPorCliente(@RequestParam @NotNull Long idCliente, @RequestParam @NotNull Long idEmpresa){
+		return this.horarioService.buscarHorarioPorCliente(idCliente, idEmpresa);
+	}
+	
+	@DeleteMapping("/apagar-horario")
+	public List<HorarioListarDTO> apagarHorario(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataHora, @RequestParam Long idCliente, @RequestParam Long idEmpresa ) {
+		return this.horarioService.apagar(dataHora, idCliente, idEmpresa);
+	}
 	
 }
