@@ -44,15 +44,17 @@ public class HorarioService {
 	}
 	
 	public List<HorarioListarDTO> listar(LocalDateTime dataHora, Long idEmpresa){
-		List<Horario> horarios = horarioRepository.listarPorDia(dataHora, idEmpresa);
+		Optional<Empresa> empresa = this.empresaRepository.findById(idEmpresa);
+		List<Horario> horarios = this.horarioRepository.listarPorDia(dataHora.getYear(),dataHora.getMonthValue(),dataHora.getDayOfMonth(), empresa.get());
 		
 		return this.convertDTO(horarios);
 	}
 
 	public List<String> filtrar(LocalDateTime data , Long idEmpresa) {
 		LocalDateTime horaHoje = LocalDateTime.now();
-		
-		List<Horario> horarios = this.horarioRepository.listarPorDia(data, idEmpresa);
+		System.out.println(LocalDateTime.now());
+		Optional<Empresa> empresa = this.empresaRepository.findById(idEmpresa);
+		List<Horario> horarios = this.horarioRepository.listarPorDia(data.getYear(),data.getMonthValue(),data.getDayOfMonth(), empresa.get());
 		
 		List<String> horariosMarcados = new ArrayList<>();
 		for(Horario h: horarios){
