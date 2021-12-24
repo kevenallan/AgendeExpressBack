@@ -20,7 +20,8 @@ public interface HorarioRepository extends JpaRepository<Horario, Long>{
 			+ "WHERE DATE_PART('year', h.datahora) = :ano "
 			+ "and DATE_PART('month', h.datahora) = :mes "
 			+ "and DATE_PART('day', h.datahora) = :dia "
-			+ "and h.empresa = :idEmpresa ")
+			+ "and h.empresa = :idEmpresa "
+			+ "order by h.datahora")
 	List<Horario> listarPorDia(int ano,int mes,int dia, Empresa idEmpresa);
 
 	List<Horario> findByCliente(Cliente cliente);
