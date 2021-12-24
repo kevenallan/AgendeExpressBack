@@ -59,9 +59,10 @@ public class HorarioService {
 	public List<String> filtrar(LocalDateTime data , Long idEmpresa) {
 		LocalDateTime horaHoje = LocalDateTime.now();
 		Optional<Empresa> empresa = this.empresaRepository.findById(idEmpresa);
+		List<String> horas = new ArrayList<>();
 		
 		if (data.isBefore(horaHoje)) {
-			return null;
+			return horas;
 		}
 		
 		List<Horario> horarios = this.horarioRepository.listarPorDia(data.getYear(),data.getMonthValue(),data.getDayOfMonth(), empresa.get());
@@ -71,7 +72,6 @@ public class HorarioService {
 			horariosMarcados.add(Integer.toString(h.getDatahora().getHour()));
 		}
 		
-		List<String> horas = new ArrayList<>();
 		if(data.toLocalDate().equals(horaHoje.toLocalDate())) {
 			for(int i = 8; i < 18; i++) {
 				if(!horariosMarcados.contains(Integer.toString(i))){
