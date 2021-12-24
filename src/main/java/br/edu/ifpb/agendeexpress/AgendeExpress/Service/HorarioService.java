@@ -69,6 +69,7 @@ public class HorarioService {
 				if(!horariosMarcados.contains(Integer.toString(i))){
 					if(i > horaHoje.getHour())
 						horas.add(Integer.toString(i));	
+					
 				}
 			}
 		}
@@ -79,6 +80,7 @@ public class HorarioService {
 				}
 			}
 		}
+		horas.add(LocalDateTime.now().toString());
 		return horas;
 	}
 
