@@ -2,10 +2,13 @@ package br.edu.ifpb.agendeexpress.AgendeExpress.Service;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,17 +33,20 @@ public class HorarioService {
 	@Autowired
 	private EmpresaRepository empresaRepository;
 	
-	public void cadastrar(HorarioCadastrarDTO horario) {
-		Horario horarioExistente = horarioRepository.findByDatahora(horario.getDataHora());
-		Optional<Cliente> cliente = clienteRepository.findById(horario.getIdCliente());
-		Optional<Empresa> empresa = empresaRepository.findById(horario.getIdEmpresa());
-	
+	public Boolean cadastrar(HorarioCadastrarDTO horario) {
+		
+		Optional<Cliente> cliente = this.clienteRepository.findById(horario.getIdCliente());
+		Optional<Empresa> empresa = this.empresaRepository.findById(horario.getIdEmpresa());
+		List<Horario> horarios = this.horarioRepository.buscarHorariosPorClienteEmpresa(horario.getDataHora().getYear(), horario.getDataHora().getMonthValue(), horario.getDataHora().getDayOfMonth(), empresa.get(), cliente.get());
+		if (horarios.size()>=2) {
+			return false;
+		}
 		horarioRepository.save(Horario.builder()
 				.datahora(horario.getDataHora())
 				.cliente(cliente.get())
 				.empresa(empresa.get())
 				.build());
-				
+		return true;		
 	}
 	
 	public List<HorarioListarDTO> listar(LocalDateTime dataHora, Long idEmpresa){
@@ -52,8 +58,12 @@ public class HorarioService {
 
 	public List<String> filtrar(LocalDateTime data , Long idEmpresa) {
 		LocalDateTime horaHoje = LocalDateTime.now();
-		System.out.println(LocalDateTime.now());
 		Optional<Empresa> empresa = this.empresaRepository.findById(idEmpresa);
+		
+		if (data.isBefore(horaHoje)) {
+			return null;
+		}
+		
 		List<Horario> horarios = this.horarioRepository.listarPorDia(data.getYear(),data.getMonthValue(),data.getDayOfMonth(), empresa.get());
 		
 		List<String> horariosMarcados = new ArrayList<>();
@@ -62,8 +72,6 @@ public class HorarioService {
 		}
 		
 		List<String> horas = new ArrayList<>();
-		System.out.println(data.toLocalDate());
-		System.out.println(horaHoje.toLocalDate());
 		if(data.toLocalDate().equals(horaHoje.toLocalDate())) {
 			for(int i = 8; i < 18; i++) {
 				if(!horariosMarcados.contains(Integer.toString(i))){
@@ -80,7 +88,6 @@ public class HorarioService {
 				}
 			}
 		}
-		horas.add(LocalDateTime.now().toString());
 		return horas;
 	}
 

@@ -29,8 +29,8 @@ public class HorarioController {
 	private HorarioService horarioService;
 	
 	@PostMapping("/cadastrar")
-	public void cadastrar(@RequestBody HorarioCadastrarDTO dto) {
-		this.horarioService.cadastrar(dto);
+	public Boolean cadastrar(@RequestBody HorarioCadastrarDTO dto) {
+		return this.horarioService.cadastrar(dto);
 	}
 	
 	@GetMapping("/listar")
