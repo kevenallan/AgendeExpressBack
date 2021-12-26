@@ -25,8 +25,8 @@ import br.edu.ifpb.agendeexpress.AgendeExpress.Service.EmpresaService;
 
 @RestController
 @RequestMapping(value = "/empresa")
-//@CrossOrigin(origins = "https://agende-express-front.herokuapp.com")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://agende-express-front.herokuapp.com")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class EmpresaController {
 
 	@Autowired

@@ -22,8 +22,8 @@ import br.edu.ifpb.agendeexpress.AgendeExpress.Service.HorarioService;
 
 @RestController
 @RequestMapping(value = "/horario")
-//@CrossOrigin(origins = "https://agende-express-front.herokuapp.com")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://agende-express-front.herokuapp.com")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class HorarioController {
 
 	@Autowired
